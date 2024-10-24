@@ -140,9 +140,115 @@ namespace Metodos_y_Clases
             }while (intentos > 0 && exito == false);
         }
 
+        static bool esMultiplo(int n, int n2)
+        {
+            if (n2 % n == 0)
+                return true;
+            else
+                return false;
+        }
+        static void eje07()
+        {
+            Console.Write("Introduzca el primero número: ");
+            int n = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Introduzca el segundo número: ");
+            int n2 = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine($"Es múltiplo {n} de {n2}?: {esMultiplo(n,n2)}");
+        }
+
+        static int sumaDigitos(string n) {
+            int suma = 0;
+
+            for(int i = 0; i<n.Length; i++)
+            {
+                suma += (int)char.GetNumericValue(n[i]);
+            }
+
+            return suma;
+        }
+
+        static void eje08() { 
+            Console.Write("Introduzca el número: ");
+            string n = Console.ReadLine();
+
+            Console.WriteLine($"La suma de los dígitos de {n} es: {sumaDigitos(n)}");
+        }
+
+        static int menorNumero(int[] n)
+        {
+            int menor = int.MaxValue;
+            for(int i = 0; i < n.Length; i++)
+            {
+                if(n[i] < menor)
+                {
+                    menor = n[i];
+                }
+            }
+            return menor;
+        }
+        static void eje09() {
+            int[] n = { 1, 2, 3, 4, 5, 6, 7, 8,-20, 9, 10, 11, 12, 13, 14 };
+            Console.WriteLine($"El menor número del array es {menorNumero(n)}");
+        }
+
+        class Cliente
+        {
+            private static int _id = 0;
+            private int id = _id++;
+            private string name;
+            private int cantidadTotal;
+
+            public Cliente(string name, int cantidadTotal)
+            {
+                this.id = id;
+                this.name = name;
+                this.cantidadTotal = cantidadTotal;
+            }
+
+            public void ingresar(int n, Banco banco)
+            {
+
+            }
+
+            public void sacar(int n, Banco banco)
+            {
+
+            }
+
+            public void GetCantidadTotal(Banco banco)
+            {
+
+            }
+
+            public void MostrarInformacion()
+            {
+
+            }
+        }
+
+        class Banco
+        {
+            public int id;
+            public string name;
+
+            public Banco(int id, string name) {
+                this.id = id;
+                this.name = name;
+            }
+
+
+
+        }
+
+        static void eje10() {
+            Banco banco = new Banco(1, "Santander");
+        
+        }
         static void Main(string[] args)
         {
-            eje06();
+            eje10();
         }
     }
 }
