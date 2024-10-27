@@ -193,59 +193,91 @@ namespace Metodos_y_Clases
             Console.WriteLine($"El menor número del array es {menorNumero(n)}");
         }
 
-        class Cliente
+        public class Cliente
         {
-            private static int _id = 0;
-            private int id = _id++;
-            private string name;
-            private int cantidadTotal;
+            private string nombre;
+            private double cantidadTotal;
 
-            public Cliente(string name, int cantidadTotal)
+            public Cliente(string nombre)
             {
-                this.id = id;
-                this.name = name;
-                this.cantidadTotal = cantidadTotal;
+                this.nombre = nombre;
+                cantidadTotal = 0; 
             }
 
-            public void ingresar(int n, Banco banco)
+            public void Ingresar(double dinero)
             {
-
+                if (dinero > 0)
+                {
+                    cantidadTotal += dinero;
+                    Console.WriteLine($"{nombre} ha ingresado: {dinero}$");
+                }
+                else
+                {
+                    Console.WriteLine("No se puede ingresar una cantidad negativa.");
+                }
             }
 
-            public void sacar(int n, Banco banco)
+            public void Sacar(double dinero)
             {
-
+                if (dinero > 0 && dinero <= cantidadTotal)
+                {
+                    cantidadTotal -= dinero;
+                    Console.WriteLine($"{nombre} ha retirado: {dinero}$");
+                }
+                else
+                {
+                    Console.WriteLine("No se puede retirar una cantidad negativa o mayor al saldo actual.");
+                }
             }
 
-            public void GetCantidadTotal(Banco banco)
+            public double GetCantidadTotal()
             {
-
+                return cantidadTotal;
             }
 
             public void MostrarInformacion()
             {
-
+                Console.WriteLine($"{nombre} tiene un total de: {cantidadTotal}$ en su cuenta.");
             }
         }
 
-        class Banco
+        public class Banco
         {
-            public int id;
-            public string name;
+            private Cliente cliente1, cliente2, cliente3;
 
-            public Banco(int id, string name) {
-                this.id = id;
-                this.name = name;
+            public Banco()
+            {
+                cliente1 = new Cliente("Cliente 1");
+                cliente2 = new Cliente("Cliente 2");
+                cliente3 = new Cliente("Cliente 3");
             }
 
+            public void Operar()
+            {
+                cliente1.Ingresar(1000);
+                cliente2.Ingresar(2000);
+                cliente3.Ingresar(1500);
+            }
 
+            public void ObtenerEstado()
+            {
+                double totalBanco = cliente1.GetCantidadTotal() + cliente2.GetCantidadTotal() + cliente3.GetCantidadTotal();
+
+                Console.WriteLine($"Dinero total en el banco: {totalBanco}$\n");
+
+                cliente1.MostrarInformacion();
+                cliente2.MostrarInformacion();
+                cliente3.MostrarInformacion();
+            }
 
         }
 
         static void eje10() {
-            Banco banco = new Banco(1, "Santander");
-        
+            Banco banco = new Banco(); 
+            banco.Operar();            
+            banco.ObtenerEstado();
         }
+
         static void Main(string[] args)
         {
             eje10();
